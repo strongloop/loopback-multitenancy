@@ -1,0 +1,9 @@
+{
+  "loopback-component-explorer": {
+    "mountPath": "/explorer"
+  },
+  "../node_modules/loopback-multitenancy": {
+    "tenantResolverMountPath": "/api/:tenantId/:modelId/:modelName",
+    "modelResolverMountPath": "/api"
+  }
+}
