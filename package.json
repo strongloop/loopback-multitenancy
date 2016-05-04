@@ -1,0 +1,27 @@
+{
+  "name": "loopback-multitenancy",
+  "version": "1.0.0",
+  "description": "Multitenancy components for LoopBack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r test/init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strongloop/loopback-multitenancy.git"
+  },
+  "keywords": [
+    "loopback",
+    "multitenancy"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strongloop/loopback-multitenancy/issues"
+  },
+  "homepage": "https://github.com/strongloop/loopback-multitenancy#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
