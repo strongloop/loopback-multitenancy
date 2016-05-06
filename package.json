@@ -4,7 +4,9 @@
   "description": "Multitenancy components for LoopBack.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r test/init"
+    "lint": "eslint .",
+    "test": "mocha -r test/init",
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,11 @@
   "homepage": "https://github.com/strongloop/loopback-multitenancy#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "dirty-chai": "^1.2.2",
+    "eslint": "^2.9.0",
+    "eslint-config-loopback": "^3.0.1",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
   }
 }
