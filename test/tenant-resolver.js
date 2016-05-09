@@ -70,7 +70,7 @@ describe('tenant resolver', function() {
       });
     });
 
-    it('is invalid when model name is a not string', function(done) {
+    it('is invalid when model name is not a string', function(done) {
       var req = {
         params: {
           tenantId: '1',
