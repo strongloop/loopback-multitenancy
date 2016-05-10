@@ -6,5 +6,5 @@ var sinonChai = require('sinon-chai');
 chai.use(dirtyChai);
 chai.use(sinonChai);
 
-global.expect = chai.expect;
-global.sinon = sinon;
+exports.expect = chai.expect;
+exports.sinon = sinon;

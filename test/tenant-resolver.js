@@ -1,3 +1,5 @@
+var expect = require('./init').expect;
+var sinon = require('./init').sinon;
 var tenantResolver = require('../lib/tenant-resolver');
 
 describe('tenant resolver', function() {
