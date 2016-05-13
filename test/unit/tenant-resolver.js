@@ -2,21 +2,11 @@ var expect = require('../init').expect;
 var sinon = require('../init').sinon;
 var tenantResolver = require('../../lib/tenant-resolver');
 
-describe('tenant resolver', function() {
-  var resolver, validReq;
+var resolver, validReq;
 
-  before('set up the tenant resolver', function() {
-    resolver = tenantResolver();
-  });
-  before('set up a valid request', function() {
-    validReq = {
-      params: {
-        tenantId: '1',
-        modelId: '1',
-        modelName: 'Customer',
-      },
-    };
-  });
+describe('tenant resolver', function() {
+  before(setUpTenantResolver);
+  before(setUpValidRequest);
 
   describe('middleware', function() {
     it('should be a function', function() {
@@ -126,3 +116,17 @@ describe('tenant resolver', function() {
     });
   });
 });
+
+function setUpTenantResolver() {
+  resolver = tenantResolver();
+}
+
+function setUpValidRequest() {
+  validReq = {
+    params: {
+      tenantId: '1',
+      modelId: '1',
+      modelName: 'Customer',
+    },
+  };
+}
