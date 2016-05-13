@@ -4,9 +4,11 @@
   "description": "Multitenancy components for LoopBack.",
   "main": "index.js",
   "scripts": {
+    "integration": "mocha -r test/init test/integration",
     "lint": "eslint .",
-    "test": "mocha -r test/init",
-    "posttest": "npm run lint"
+    "test": "npm run unit && npm run integration",
+    "posttest": "npm run lint",
+    "unit": "mocha -r test/init test/unit"
   },
   "repository": {
     "type": "git",
@@ -26,9 +28,11 @@
     "chai": "^3.5.0",
     "dirty-chai": "^1.2.2",
     "eslint": "^2.9.0",
-    "eslint-config-loopback": "^3.0.1",
+    "eslint-config-loopback": "^3.0.0",
+    "loopback": "^2.28.0",
     "mocha": "^2.4.5",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "supertest": "^1.2.0"
   }
 }
