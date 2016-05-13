@@ -28,5 +28,5 @@ function setUpLoopBackApp() {
 }
 
 function registerTenantResolver() {
-  app.use('/api/:tenantId/:modelId/:modelName', tenantResolver());
+  app.use('/api/:tenantId/:modelId/:modelName', tenantResolver);
 }

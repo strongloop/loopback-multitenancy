@@ -2,20 +2,19 @@ var expect = require('../init').expect;
 var sinon = require('../init').sinon;
 var tenantResolver = require('../../lib/tenant-resolver');
 
-var resolver, validReq;
+var validReq;
 
 describe('tenant resolver', function() {
-  before(setUpTenantResolver);
   before(setUpValidRequest);
 
   describe('middleware', function() {
     it('should be a function', function() {
-      expect(resolver).to.be.a('function');
+      expect(tenantResolver).to.be.a('function');
     });
 
     it('should call `next` when execution is finished', function() {
       var spy = sinon.spy();
-      resolver(validReq, null, spy);
+      tenantResolver(validReq, null, spy);
       expect(spy).to.have.been.called();
     });
   });
@@ -27,7 +26,7 @@ describe('tenant resolver', function() {
           tenantId: false,
         },
       };
-      resolver(req, null, function(err) {
+      tenantResolver(req, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -35,7 +34,7 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when tenant id is a string', function(done) {
-      resolver(validReq, null, function(err) {
+      tenantResolver(validReq, null, function(err) {
         expect(err).to.not.exist();
         done();
       });
@@ -48,7 +47,7 @@ describe('tenant resolver', function() {
           modelId: false,
         },
       };
-      resolver(req, null, function(err) {
+      tenantResolver(req, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -56,7 +55,7 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when model id is a string', function(done) {
-      resolver(validReq, null, function(err) {
+      tenantResolver(validReq, null, function(err) {
         expect(err).to.not.exist();
         done();
       });
@@ -70,7 +69,7 @@ describe('tenant resolver', function() {
           modelName: false,
         },
       };
-      resolver(req, null, function(err) {
+      tenantResolver(req, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -78,7 +77,7 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when model name is a string', function(done) {
-      resolver(validReq, null, function(err) {
+      tenantResolver(validReq, null, function(err) {
         expect(err).to.not.exist();
         done();
       });
@@ -95,31 +94,27 @@ describe('tenant resolver', function() {
     };
 
     it('contains the tenant id', function(done) {
-      resolver(req, {}, function() {
+      tenantResolver(req, {}, function() {
         expect(req.tenant.id).to.equal('1');
         done();
       });
     });
 
     it('contains the model id', function(done) {
-      resolver(req, {}, function() {
+      tenantResolver(req, {}, function() {
         expect(req.tenant.modelId).to.equal('1');
         done();
       });
     });
 
     it('contains the model name', function(done) {
-      resolver(req, {}, function() {
+      tenantResolver(req, {}, function() {
         expect(req.tenant.modelName).to.equal('Customer');
         done();
       });
     });
   });
 });
-
-function setUpTenantResolver() {
-  resolver = tenantResolver();
-}
 
 function setUpValidRequest() {
   validReq = {
