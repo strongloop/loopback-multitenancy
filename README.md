@@ -10,7 +10,7 @@ Massages the URL path into an object populated with tenant information.
 
 ```
 var tenantResolver = require('loopback-multitenancy').tenantResolver;
-app.use('/api/:tenantId/:modelId/:modelName', tenantResolver);
+app.use('/api/:tenantId/:modelId/:modelName', tenantResolver());
 
 //req.tenant.id = :tenantId (String)
 //req.tenant.modelId = :modelId (String)
