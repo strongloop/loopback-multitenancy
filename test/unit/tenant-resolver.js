@@ -2,31 +2,27 @@ var expect = require('../init').expect;
 var sinon = require('../init').sinon;
 var tenantResolver = require('../../lib/tenant-resolver');
 
-var validReq;
-
 describe('tenant resolver', function() {
-  before(setUpValidRequest);
-
-  describe('middleware', function() {
+  context('middleware', function() {
     it('should be a function', function() {
       expect(tenantResolver).to.be.a('function');
     });
 
     it('should call `next` when execution is finished', function() {
       var spy = sinon.spy();
-      tenantResolver(validReq, null, spy);
+      tenantResolver(getValidRequest(), null, spy);
       expect(spy).to.have.been.called();
     });
   });
 
-  describe('validation', function() {
+  context('validation', function() {
     it('is invalid when tenant id is a not string', function(done) {
-      var req = {
+      var reqWithInvalidTenantId = {
         params: {
           tenantId: false,
         },
       };
-      tenantResolver(req, null, function(err) {
+      tenantResolver(reqWithInvalidTenantId, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -34,20 +30,20 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when tenant id is a string', function(done) {
-      tenantResolver(validReq, null, function(err) {
+      tenantResolver(getValidRequest(), null, function(err) {
         expect(err).to.not.exist();
         done();
       });
     });
 
     it('is invalid when model id is not a string', function(done) {
-      var req = {
+      var reqWithInvalidModelId = {
         params: {
           tenantId: '1',
           modelId: false,
         },
       };
-      tenantResolver(req, null, function(err) {
+      tenantResolver(reqWithInvalidModelId, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -55,21 +51,21 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when model id is a string', function(done) {
-      tenantResolver(validReq, null, function(err) {
+      tenantResolver(getValidRequest(), null, function(err) {
         expect(err).to.not.exist();
         done();
       });
     });
 
     it('is invalid when model name is not a string', function(done) {
-      var req = {
+      var reqWithInvalidModelName = {
         params: {
           tenantId: '1',
           modelId: '1',
           modelName: false,
         },
       };
-      tenantResolver(req, null, function(err) {
+      tenantResolver(reqWithInvalidModelName, null, function(err) {
         expect(err).to.exist();
         expect(err.message).to.contain('Invalid');
         done();
@@ -77,47 +73,41 @@ describe('tenant resolver', function() {
     });
 
     it('is valid when model name is a string', function(done) {
-      tenantResolver(validReq, null, function(err) {
+      tenantResolver(getValidRequest(), null, function(err) {
         expect(err).to.not.exist();
         done();
       });
     });
   });
 
-  describe('request object tenant data', function() {
-    var req = {
-      params: {
-        tenantId: '1',
-        modelId: '1',
-        modelName: 'Customer',
-      },
-    };
+  context('request object tenant data', function() {
+    var req;
 
-    it('contains the tenant id', function(done) {
-      tenantResolver(req, {}, function() {
-        expect(req.tenant.id).to.equal('1');
-        done();
-      });
+    before(setModifiedRequest);
+
+    it('contains the tenant id', function() {
+      expect(req.tenant.id).to.equal('1');
     });
 
-    it('contains the model id', function(done) {
-      tenantResolver(req, {}, function() {
-        expect(req.tenant.modelId).to.equal('1');
-        done();
-      });
+    it('contains the model id', function() {
+      expect(req.tenant.modelId).to.equal('1');
     });
 
-    it('contains the model name', function(done) {
-      tenantResolver(req, {}, function() {
-        expect(req.tenant.modelName).to.equal('Customer');
-        done();
-      });
+    it('contains the model name', function() {
+      expect(req.tenant.modelName).to.equal('Customer');
     });
+
+    function setModifiedRequest(done) {
+      // tenant resolver modifies the original request object during execution,
+      // therefore we need to store the modified instance to verify changes
+      req = getValidRequest();
+      tenantResolver(req, {}, done);
+    }
   });
 });
 
-function setUpValidRequest() {
-  validReq = {
+function getValidRequest() {
+  return {
     params: {
       tenantId: '1',
       modelId: '1',
