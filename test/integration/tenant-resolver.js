@@ -9,13 +9,22 @@ describe('tenant resolver', function() {
   before(setUpLoopBackApp);
   before(registerTenantResolver);
 
-  it('should set tenant data on the request object', function(done) {
+  it('sets tenant data on the request object', function(done) {
+    var observedRequest = null;
     app.use(function(req, res, next) {
-      expect(req.tenant).to.eql({id: '1', modelId: '2', modelName: 'Todo'});
+      observedRequest = req;
+      next();
+    });
+    request(app).get('/api/1/2/Todo').end(function(err) {
+      if (err) return done(err);
+
+      expect(observedRequest).to.have.property('tenant').eql({
+        id: '1',
+        modelId: '2',
+        modelName: 'Todo',
+      });
       done();
     });
-    app.use(loopback.rest()); // must be called later in the middleware chain
-    request(app).get('/api/1/2/Todo').end();
   });
 });
 
@@ -24,7 +33,6 @@ function setUpLoopBackApp() {
   var db = app.dataSource('db', {connector: 'memory'});
   var Todo = app.registry.createModel('Todo', {});
   Todo.attachTo(db);
-  app.set('legacyExplorer', false);
 }
 
 function registerTenantResolver() {
