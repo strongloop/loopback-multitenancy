@@ -6,8 +6,7 @@ var tenantResolver = require('../../lib/tenant-resolver');
 var app;
 
 describe('tenant resolver', function() {
-  before(setUpLoopBackApp);
-  before(registerTenantResolver);
+  before(setUpLoopBackAppWithResolver);
 
   it('sets tenant data on the request object', function(done) {
     var observedRequest = null;
@@ -28,13 +27,10 @@ describe('tenant resolver', function() {
   });
 });
 
-function setUpLoopBackApp() {
+function setUpLoopBackAppWithResolver() {
   app = loopback({localRegistry: true});
   var db = app.dataSource('db', {connector: 'memory'});
   var Todo = app.registry.createModel('Todo', {});
   Todo.attachTo(db);
-}
-
-function registerTenantResolver() {
   app.use('/api/:tenantId/:modelId/:modelName', tenantResolver);
 }
