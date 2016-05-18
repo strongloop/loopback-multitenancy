@@ -1,0 +1,10 @@
+{
+  "db1": {
+    "name": "db1",
+    "connector": "memory"
+  },
+  "db2": {
+    "name": "db2",
+    "connector": "memory"
+  }
+}

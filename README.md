@@ -17,15 +17,15 @@ app.use('/api/:tenantId/:modelId/:modelName', tenantResolver);
 //req.tenant.modelName = :modelName (String)
 ```
 
-*Takes `/api/1/Joe/Todo` and creates req.tenant = {id: '1' modelId: 'Joe',
-modelName: 'Todo'}*
+*Takes `/api/1/Joe/Todo` and creates `req.tenant = {id: '1' modelId: 'Joe',
+modelName: 'Todo'}`*
 
 ## Model resolver middleware
 
 Transforms the URL path to a namespaced URL path using the tenant data provided
 in the request object (`req.tenant`).
 
-*Changes `/api/1/Joe/Todo` to `/api/1_Joe_Todo*
+*Changes `/api/1/Joe/Todo` to `/api/1_Joe_Todo`*
 
 ## Usage
 
