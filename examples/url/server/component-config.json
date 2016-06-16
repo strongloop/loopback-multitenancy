@@ -3,7 +3,7 @@
     "mountPath": "/explorer"
   },
   "../node_modules/loopback-multitenancy": {
-    "tenantResolverMountPath": "/api/:tenantId/:modelId/:modelName",
-    "modelResolverMountPath": "/api"
+    "scheme": "url",
+    "mountPath": "/:tenantId/:groupId/:resourceId"
   }
 }
