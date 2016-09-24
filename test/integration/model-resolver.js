@@ -6,7 +6,7 @@ var tenantResolver = require('../../lib/tenant-resolver');
 
 var app, Todo;
 
-describe('model resolver', function() {
+describe.skip('model resolver', function() {
   beforeEach(setUpLoopBackAppWithResolvers);
 
   it('maps the URL to a namespaced URL', function(done) {
