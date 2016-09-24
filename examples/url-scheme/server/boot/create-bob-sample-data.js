@@ -1,4 +1,7 @@
+'use strict';
+
 module.exports = function(app, cb) {
+  /*eslint-disable camelcase*/
   var Two_Bob_Todo = app.models.Two_Bob_Todo;
   app.dataSources.db2.automigrate('Two_Bob_Todo', function(err) {
     if (err) return cb(err);
@@ -8,4 +11,5 @@ module.exports = function(app, cb) {
       {content: 'f'},
     ], cb);
   });
+  /*eslint-enable camelcase*/
 };

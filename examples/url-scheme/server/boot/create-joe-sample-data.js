@@ -1,4 +1,7 @@
+'use strict';
+
 module.exports = function(app, cb) {
+  /*eslint-disable camelcase*/
   var One_Joe_Todo = app.models.One_Joe_Todo;
   app.dataSources.db1.automigrate('One_Joe_Todo', function(err) {
     if (err) return cb(err);
@@ -8,4 +11,5 @@ module.exports = function(app, cb) {
       {content: 'c'},
     ], cb);
   });
+  /*eslint-enable camelcase*/
 };
