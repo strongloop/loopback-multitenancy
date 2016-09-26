@@ -1,3 +1,6 @@
+'use strict';
+
+var describe = require('../describe');
 var expect = require('../init').expect;
 var loopback = require('loopback');
 var request = require('supertest');
