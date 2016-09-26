@@ -1,3 +1,6 @@
+'use strict';
+
+var describe = require('../describe');
 var expect = require('../init').expect;
 var sinon = require('../init').sinon;
 var tenantResolver = require('../../lib/tenant-resolver');

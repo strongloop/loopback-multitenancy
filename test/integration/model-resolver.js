@@ -1,3 +1,6 @@
+'use strict';
+
+var describe = require('../describe');
 var expect = require('../init').expect;
 var loopback = require('loopback');
 var modelResolver = require('../../lib/model-resolver');
@@ -6,7 +9,7 @@ var tenantResolver = require('../../lib/tenant-resolver');
 
 var app, Todo;
 
-describe.skip('model resolver', function() {
+describe('model resolver', function() {
   beforeEach(setUpLoopBackAppWithResolvers);
 
   it('maps the URL to a namespaced URL', function(done) {
