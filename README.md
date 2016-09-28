@@ -1,3 +1,7 @@
+**WORK IN PROGRESS (WIP) -- Not recommended for production use**
+
+---
+
 # loopback-multitenancy
 
 Multitenancy middleware for LoopBack.
