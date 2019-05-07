@@ -18,7 +18,7 @@
     "loopback",
     "multitenancy"
   ],
-  "author": "",
+  "author": "IBM Corp.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/strongloop/loopback-multitenancy/issues"
